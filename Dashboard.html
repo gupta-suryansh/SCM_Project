@@ -250,4 +250,79 @@
             </div>
         </div>
     </div>
+    <script>
+        window.onload = async () => {
+            try {
+                const userData = JSON.parse(sessionStorage.getItem('user'));
+                
+                if (!userData || !userData.email) {
+                    alert('Please login');
+                    window.location.href = 'login.html';
+                    return;
+                }
+        
+                const apiUrl = 'https://67406162d0b59228b7efd22d.mockapi.io/users';
+                
+                
+                const response = await fetch(`${apiUrl}?email=${userData.email}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+                }
+                
+                const users = await response.json();
+        
+                if (users.length === 0) {
+                    alert("No user found with this email");
+                    window.location.href = 'login.html';
+                } else {
+                    const user = users[0];
+        
+                    
+                    const displayName = user.fullName || userData.name || "User";
+                    document.getElementById("userName").innerHTML = displayName;
+                }
+            } catch (error) {
+                console.error('Error occurred:', error);
+                alert('An error occurred while fetching data. Please try again later.');
+                window.location.href = 'login.html';
+            }
+        };
+        
+        function logOut() {
+            sessionStorage.removeItem('user');
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+        
+        
+    function goToProfilePage() {
     
+    const userDataString = sessionStorage.getItem('user');
+    
+    if (userDataString) {
+        
+        window.location.href = "user.html";
+    } else {
+        
+        alert('Please log in again');
+        window.location.href = 'login.html';
+    }
+}
+        function goTopage() {
+            window.location.href = "Dashboard.html";
+        }
+        
+        logOut =()=>{
+            sessionStorage.removeItem('user')
+            sessionStorage.removeItem('isLoggedIn')
+            window.location.href='login.html'
+
+        }
+        
+        
+    </script>
+
+</body>
+
+</html>
