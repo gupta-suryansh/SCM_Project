@@ -1,1 +1,1 @@
-Thid is my file
+This is SCM projct
