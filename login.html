@@ -216,3 +216,93 @@
         }
     </style>
 </head>
+<body>
+    <video class="video-background" autoplay muted loop>
+        <source src="background video.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <div class="form-container sign-in-container">
+            <form action="#" id="loginForm">
+                <h1>Sign in</h1>
+                <div class="social-container">
+                    <a href="https://www.facebook.com/" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/" class="social"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="social-container" id="message" style="color:red;"></div>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <a href="signup.html">Forgot your password?</a>
+                <button id="signIn" type="submit">Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start your journey with us</p>
+                    <button class="ghost" id="signUp"><a href="signup.html" style="color: #ddd;">Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = async () => {
+            const user = sessionStorage.getItem("user");
+            if (user) {
+                window.location.href = "Dashboard.html";
+            }
+        };
+        
+        const apiUrl = 'https://67406162d0b59228b7efd22d.mockapi.io/users';
+        
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const messageElement = document.getElementById('message');
+        
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+        
+            try {
+                const response = await fetch(`${apiUrl}?email=${email}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const users = await response.json();
+        
+                if (users.length === 0) {
+                    messageElement.innerText = 'User not found!';
+                    messageElement.style.color = 'red';
+                } else {
+                    const user = users[0];
+        
+                    if (user.password === password) {
+                        
+                        sessionStorage.setItem('user', JSON.stringify({
+                            fullName: user.fullName,
+                            phone: user.phone,
+                            email: user.email,
+                            password: user.password,
+                            gender: user.gender
+                        }));
+                        
+                        window.location.href = "Dashboard.html";
+                    } else {
+                        messageElement.innerText = 'Incorrect password!';
+                        messageElement.style.color = 'red';
+                    }
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                messageElement.innerText = 'An unexpected error occurred. Please try again.';
+                messageElement.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+
+</html>
