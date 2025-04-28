@@ -1,3 +1,3 @@
 # SCM_Project
-This is SCM project
+This is SCM projct.
 
