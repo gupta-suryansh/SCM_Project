@@ -420,3 +420,80 @@
             </footer>
         </div>
     </div>
+ <script>
+        const enrollAPI = "https://6744315db4e2e04abea12fc3.mockapi.io/enrolledCourse";
+
+        
+        async function fetchEnrolledCourses() {
+            try {
+                const response = await fetch(enrollAPI);
+                const enrolledCourses = await response.json();
+                return enrolledCourses.map(course => course.enrolledCourse);
+            } catch (error) {
+                console.error("Error fetching enrolled courses:", error);
+                alert("Failed to load enrolled courses.");
+                return [];
+            }
+        }
+
+        
+        async function enrollCourse(courseName, courseDetails, button) {
+            try {
+                const response = await fetch(enrollAPI, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ enrolledCourse: courseName, courseDetails: courseDetails })
+                });
+
+                if (response.ok) {
+                    alert(`Successfully enrolled in ${courseName}!`);
+                    button.textContent = "Already Enrolled";
+                    button.disabled = true;
+                } else {
+                    throw new Error("Failed to enroll in course");
+                }
+            } catch (error) {
+                console.error("Error enrolling in course:", error);
+                alert("An error occurred while enrolling in the course.");
+            }
+        }
+
+        
+        async function addEnrollButtons() {
+            const enrolledCourses = await fetchEnrolledCourses();
+
+            
+            const courses = document.querySelectorAll(".course");
+
+            courses.forEach(course => {
+                const courseName = course.dataset.courseName;
+                const courseDetails = course.dataset.courseDetails;
+
+                
+                const isEnrolled = enrolledCourses.includes(courseName);
+
+                
+                const enrollButton = document.createElement("button");
+                enrollButton.className = "btn-enroll";
+                enrollButton.textContent = isEnrolled ? "Already Enrolled" : "Enroll Now";
+                enrollButton.disabled = isEnrolled;
+                enrollButton.style.marginTop = "10px";
+
+                
+                if (!isEnrolled) {
+                    enrollButton.addEventListener("click", () => {
+                        enrollCourse(courseName, courseDetails, enrollButton);
+                    });
+                }
+
+                
+                course.appendChild(enrollButton);
+            });
+        }
+
+        
+        document.addEventListener("DOMContentLoaded", addEnrollButtons);
+    </script>
+</body>
+
+</html>
