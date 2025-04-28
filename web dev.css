@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+}
+
+.blue-box {
+    background-color: lightblue;
+    color: #333;
+    padding: 10px;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    justify-self: space-between;
+    align-items: center;
+    font-size: 30px;
+    padding-left: 100px;
+
+}
+
+h2 {
+    margin-top: 40px;
+}
+
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
