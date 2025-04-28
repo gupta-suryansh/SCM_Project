@@ -1,1 +1,1 @@
-This is SCM projct
+This is SCM projct.
