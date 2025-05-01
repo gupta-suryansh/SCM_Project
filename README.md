@@ -1,6 +1,6 @@
-# 🎓 EduLearn - Educational Website
+# 🎓 ScholarHub - Educational Website
 
-EduLearn is a responsive and interactive educational website designed to provide accessible learning materials, quizzes, and courses for students and lifelong learners. The platform supports multiple subjects and is built with scalability and user experience in mind.
+ScholarHub is a responsive and interactive educational website designed to provide accessible learning materials, quizzes, and courses for students and lifelong learners. The platform supports multiple subjects and is built with scalability and user experience in mind.
 
 ---
 
@@ -19,6 +19,4 @@ EduLearn is a responsive and interactive educational website designed to provide
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: HTML5, CSS3, JavaScript, React.js / Vue.js
-- **Backend**: Node.js / Django / PHP (choose one)
-- **Database**: MongoDB / PostgreSQL / MySQL
+- **Frontend**: HTML5, CSS3, JavaScript
