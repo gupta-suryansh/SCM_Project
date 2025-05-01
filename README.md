@@ -22,7 +22,3 @@ EduLearn is a responsive and interactive educational website designed to provide
 - **Frontend**: HTML5, CSS3, JavaScript, React.js / Vue.js
 - **Backend**: Node.js / Django / PHP (choose one)
 - **Database**: MongoDB / PostgreSQL / MySQL
-- **Authentication**: JWT / OAuth
-- **Hosting**: Vercel / Netlify / Heroku / AWS
-
-
